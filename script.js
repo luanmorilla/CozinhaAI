@@ -1,59 +1,54 @@
-const generateButton = document.getElementById('generate-button');
-const randomButton = document.getElementById('random-button');
-const ingredientsInput = document.getElementById('ingredients-input');
-const resultsContainer = document.getElementById('results');
+const gerarBtn = document.getElementById('gerar-receita');
+const surpresaBtn = document.getElementById('surpreenda-me');
+const input = document.getElementById('ingredientes-input');
+const resultados = document.getElementById('resultados');
+const loader = document.getElementById('loader');
 
-// 🔸 Gera receitas com IA
-async function gerarReceitas(ingredientes) {
-  const prompt = `
-Você é um chef profissional. 
-Crie 3 receitas diferentes usando APENAS os seguintes ingredientes:
-${ingredientes}
+async function gerarReceita(ingredientes) {
+  try {
+    loader.style.display = 'block';
+    resultados.innerHTML = '';
 
-Para cada receita, responda assim:
-- Nome da receita
-- Ingredientes utilizados
-- Modo de preparo passo a passo (em tópicos)
-- Sugestão de apresentação
-Não adicione ingredientes não listados.
-  `;
+    const res = await fetch('/api/openai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ingredientes })
+    });
 
-  const response = await fetch('/api/openai', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt })
-  });
+    const data = await res.json();
+    loader.style.display = 'none';
 
-  const data = await response.json();
-  mostrarReceitas(data.result);
-}
+    if (data.error) {
+      resultados.innerHTML = `<p>Erro: ${data.error}</p>`;
+      return;
+    }
 
-// 🪄 Exibe as receitas
-function mostrarReceitas(texto) {
-  resultsContainer.innerHTML = '';
-
-  const receitasSeparadas = texto.split('=====');
-  receitasSeparadas.forEach(receita => {
-    if (receita.trim()) {
+    const receitas = data.result.split(/\d\.\s/).filter(r => r.trim() !== '');
+    receitas.forEach(r => {
       const card = document.createElement('div');
       card.classList.add('card');
-      card.innerHTML = `<p>${receita.replace(/\n/g, '<br>')}</p>`;
-      resultsContainer.appendChild(card);
-    }
-  });
+      card.innerHTML = `<p>${r}</p>`;
+      resultados.appendChild(card);
+    });
+
+  } catch (err) {
+    loader.style.display = 'none';
+    resultados.innerHTML = `<p>❌ Erro ao gerar receita.</p>`;
+  }
 }
 
-// 📥 Botão principal
-generateButton.addEventListener('click', () => {
-  const ingredientes = ingredientsInput.value.trim();
-  if (ingredientes === '') return alert('Digite ao menos um ingrediente!');
-  gerarReceitas(ingredientes);
+gerarBtn.addEventListener('click', () => {
+  const ingredientes = input.value.trim();
+  if (!ingredientes) {
+    alert('Digite pelo menos um ingrediente!');
+    return;
+  }
+  gerarReceita(ingredientes);
 });
 
-// 🎲 Surpreenda-me
-randomButton.addEventListener('click', () => {
-  const exemplos = ["frango, arroz, alho", "batata, ovo, queijo", "macarrão, tomate, manjericão"];
-  const random = exemplos[Math.floor(Math.random() * exemplos.length)];
-  ingredientsInput.value = random;
-  gerarReceitas(random);
+surpresaBtn.addEventListener('click', () => {
+  const exemplos = ["frango e batata", "arroz e feijão", "ovos e queijo", "macarrão e tomate"];
+  const aleatorio = exemplos[Math.floor(Math.random() * exemplos.length)];
+  input.value = aleatorio;
+  gerarReceita(aleatorio);
 });

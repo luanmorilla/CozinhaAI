@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CozinhaAi 🍳</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CozinhaAi</title>
+  <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-
   <header>
     <h1 class="logo">🍳 CozinhaAi</h1>
   </header>
 
   <section class="hero">
     <div class="hero-content">
-      <h2>Crie receitas com o que você tem!</h2>
-      <p>Digite os ingredientes e descubra pratos deliciosos em segundos.</p>
+      <h2>Descubra receitas incríveis com o que você tem!</h2>
+      <p>Digite os ingredientes e receba receitas práticas e deliciosas 😋</p>
     </div>
   </section>
 
   <section class="search-section">
-    <input type="text" id="ingredients-input" placeholder="Ex: frango, arroz, alho..." />
+    <input type="text" id="ingredientes-input" placeholder="Ex: frango, calabresa, queijo...">
     <div class="buttons">
-      <button id="generate-button" class="btn-primary">Gerar Receita</button>
-      <button id="random-button" class="btn-secondary">Surpreenda-me</button>
+      <button id="gerar-receita" class="btn-primary">🍽️ Gerar Receita</button>
+      <button id="surpreenda-me" class="btn-secondary">🎲 Surpreenda-me</button>
     </div>
+    <div id="loader" class="loader" style="display:none;"></div>
   </section>
 
   <section class="results-section">
-    <h3>🍽️ Receitas geradas</h3>
-    <div id="results" class="results-list"></div>
+    <h3>Receitas geradas</h3>
+    <div id="resultados" class="results-container"></div>
   </section>
 
   <footer>
     <p>© 2025 CozinhaAi. Todos os direitos reservados.</p>
   </footer>
-
 </body>
 </html>
