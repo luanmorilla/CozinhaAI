@@ -1,0 +1,13 @@
+{
+    "name": "cozinhaAi",
+    "version": "1.0.0",
+    "description": "App Cozinha AI - Gere receitas com base em ingredientes",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {
+      "openai": "^4.0.0"
+    }
+  }
+  
