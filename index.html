@@ -1,104 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>O que cozinhar hoje?</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CozinhaAi 🍳</title>
   <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="app-header">
-    <h1>👩‍🍳 O que cozinhar hoje?</h1>
-    <p class="subtitle">Digite o que você tem em casa e eu crio a receita perfeita.</p>
+
+  <header>
+    <h1 class="logo">🍳 CozinhaAi</h1>
   </header>
 
-  <main class="container">
-    <section class="card">
-      <h2>Ingredientes que você tem</h2>
-      <textarea id="ingredients" rows="4" placeholder="Ex: arroz, frango, cebola, tomate, queijo..."></textarea>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Crie receitas com o que você tem!</h2>
+      <p>Digite os ingredientes e descubra pratos deliciosos em segundos.</p>
+    </div>
+  </section>
 
-      <div class="form-grid">
-        <div>
-          <label for="time">Tempo máximo</label>
-          <select id="time">
-            <option value="">Qualquer</option>
-            <option value="20">Até 20 min</option>
-            <option value="30">Até 30 min</option>
-            <option value="45">Até 45 min</option>
-            <option value="60">Até 60 min</option>
-          </select>
-        </div>
+  <section class="search-section">
+    <input type="text" id="ingredients-input" placeholder="Ex: frango, arroz, alho..." />
+    <div class="buttons">
+      <button id="generate-button" class="btn-primary">Gerar Receita</button>
+      <button id="random-button" class="btn-secondary">Surpreenda-me</button>
+    </div>
+  </section>
 
-        <div>
-          <label for="servings">Porções</label>
-          <select id="servings">
-            <option value="2">2 porções</option>
-            <option value="3">3 porções</option>
-            <option value="4" selected>4 porções</option>
-            <option value="6">6 porções</option>
-          </select>
-        </div>
+  <section class="results-section">
+    <h3>🍽️ Receitas geradas</h3>
+    <div id="results" class="results-list"></div>
+  </section>
 
-        <div>
-          <label for="cuisine">Cozinha</label>
-          <select id="cuisine">
-            <option value="">Qualquer</option>
-            <option value="brasileira">Brasileira</option>
-            <option value="italiana">Italiana</option>
-            <option value="mexicana">Mexicana</option>
-            <option value="asiática">Asiática</option>
-            <option value="mediterrânea">Mediterrânea</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Preferências</label>
-          <div class="chips">
-            <label><input type="checkbox" value="vegetariana" class="diet"> Vegetariana</label>
-            <label><input type="checkbox" value="vegana" class="diet"> Vegana</label>
-            <label><input type="checkbox" value="sem glúten" class="diet"> Sem glúten</label>
-            <label><input type="checkbox" value="low carb" class="diet"> Low carb</label>
-          </div>
-        </div>
-      </div>
-
-      <button id="generate" class="btn-primary">🍽️ Gerar receita</button>
-      <p id="status" class="status" hidden></p>
-    </section>
-
-    <section id="result" class="card" hidden>
-      <div class="recipe-head">
-        <h2 id="title"></h2>
-        <div class="meta">
-          <span id="timeBadge" class="badge"></span>
-          <span id="servingsBadge" class="badge"></span>
-          <span id="cuisineBadge" class="badge" hidden></span>
-        </div>
-      </div>
-
-      <div id="dietTags" class="tags"></div>
-
-      <div class="flex-columns">
-        <div>
-          <h3>Ingredientes</h3>
-          <ul id="ingredientsList" class="list"></ul>
-        </div>
-        <div>
-          <h3>Passo a passo</h3>
-          <ol id="stepsList" class="list"></ol>
-        </div>
-      </div>
-
-      <div id="tipsBox" class="tips" hidden>
-        <h3>💡 Dicas</h3>
-        <ul id="tipsList" class="list"></ul>
-      </div>
-    </section>
-  </main>
-
-  <footer class="app-footer">
-    <p>© 2025 O que cozinhar hoje? — feito com ❤️</p>
+  <footer>
+    <p>© 2025 CozinhaAi. Todos os direitos reservados.</p>
   </footer>
+
 </body>
 </html>
